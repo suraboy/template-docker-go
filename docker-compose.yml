@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  template-docker-go:
+    container_name: template-docker-go
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    restart: always
+    ports:
+      - "7305:8080"
+    volumes:
+      - ./:/app
+    environment:
+      APP_ENV: local
+    networks:
+      network-go:
+        aliases:
+          - go-echo.eggsmartpos.local
+
+networks:
+  network-go:
+    external: false
+    name: network-go
